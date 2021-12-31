@@ -3,7 +3,7 @@ version: '3'
 services:
   nginx:
     container_name: nginx
-    image: nginx
+    image: staticfloat/nginx-certbot
     restart: "always"
     ports:
       - 80:80
@@ -13,10 +13,19 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
+    environment:
+      - CERTBOT_EMAIL
+      - STAGING=0
+      - RENEWAL_INTERVAL=30d
     volumes:
-      - ./conf.d:/etc/nginx/conf.d
+      - letsencrypt-data:/etc/letsencrypt
+      - ./conf.d:/etc/nginx/user.conf.d:ro
+      - ./supported_domains:/etc/certbot/extra_domains:ro
     networks:
       - webserver-net
+
+volumes:
+  letsencrypt-data:
 
 networks:
   webserver-net:
