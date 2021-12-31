@@ -5,9 +5,9 @@ services:
     container_name: nginx
     image: staticfloat/nginx-certbot
     restart: "always"
-    ports:
-      - 80:80
-      - 443:443
+    #ports:
+    #  - 80:80
+    #  - 443:443
     logging:
       driver: "json-file"
       options:
@@ -21,12 +21,13 @@ services:
       - letsencrypt-data:/etc/letsencrypt
       - ./conf.d:/etc/nginx/user.conf.d:ro
       - ./supported_domains:/etc/certbot/extra_domains:ro
-    networks:
-      - webserver-net
+    network_mode: host
+    #networks:
+    #  - webserver-net
 
 volumes:
   letsencrypt-data:
 
-networks:
-  webserver-net:
-    driver: bridge
+#networks:
+#  webserver-net:
+#    driver: bridge
