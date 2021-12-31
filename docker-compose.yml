@@ -5,8 +5,6 @@ services:
     container_name: nginx
     image: nginx
     restart: "always"
-    depends_on:
-      - wordpress
     ports:
       - 80:80
       - 443:443
