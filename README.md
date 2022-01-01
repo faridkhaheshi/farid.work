@@ -11,3 +11,8 @@ You have to enter two pieces of information regarding the SSL certificates requi
 ## Running the server:
 
 Go to the project directory and run `docker-compose up -d`. It will take few seconds the first time because it will generate the ssl certificates.
+
+
+## Restarting nginx
+
+Just send a HUP signal to the container by running `docker kill --signal=HUP nginx`
